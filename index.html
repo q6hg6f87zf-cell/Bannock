@@ -159,7 +159,7 @@ body{font-family:'Georgia',serif;background:#050510;color:#e8e0ff;min-height:100
 // HOLLOW REALM — ALL GAME DATA
 // ═══════════════════════════════════════════════════
 
-const NAMES = ["Bubbles","Wiggles","Dottie","Fern","Pippa","Coco","Boo","Thistle","Mochi","Remy","Pebble","Snoot","Clover","Noodle","Zazu","Binky","Tangle","Marshy","Grim","Wick","Wren","Fizz","Dusk","Vex","Rue","Hollow","Sable","Thorn","Cinder","Ash"];
+const NAMES = ["Aldis", "Borgakh", "Caelia", "Dorian", "Elenwen", "Farkas", "Gideon", "Hadvar", "Iona", "Jorunn", "Kael", "Lydia", "Maiev", "Nyx", "Orion", "Rowan", "Soren", "Talia", "Ulfric", "Vael", "Wynne", "Xander", "Ysolda", "Zane", "Aelith", "Bram", "Cormac", "Darius", "Elara", "Fenris"];
 const ORIGINS = ["Dark Enchanted Forest","Crumbling Kingdom","Underground Caverns","Hollow’s Edge","Sunken Library"];
 const CLASSES = ["Warrior","Wizard","Rogue","Healer","Merchant","Bard"];
 const CLASS_HP = {Warrior:12,Wizard:7,Rogue:8,Healer:9,Merchant:8,Bard:8};
@@ -853,10 +853,10 @@ phases:[
 {phase:4,name:"The Reckoning",hp:"At 0 HP",desc:"Collapses. The man surfaces. One round of lucidity. He speaks. What he says is arc-relevant.",color:"#ce93d8"}
 ],
 loot:[
-{item:"Ashen Fang (weapon enchantment)",chance:"65%"},
-{item:"Pack Sigil (faction key)",chance:"80%"},
-{item:"Hollow-Touched Pelt",chance:"45%"},
-{item:"Gravenor’s Memory (arc item)",chance:"Phase 4 only — 100%"}
+{item:"Ashen Fang (Weapon Enchantment)",chance:"65%",desc:"+1 ATK. Bleeds target for 1 HP per turn."},
+{item:"Pack Sigil (Faction Key)",chance:"80%",desc:"Grants safe passage through Forest Wolf territories."},
+{item:"Hollow-Touched Pelt",chance:"45%",desc:"Mythic crafting material. Can be forged into stealth armor."},
+{item:"Gravenor’s Memory (Arc Item)",chance:"Phase 4 only — 100%",desc:"A crystalline fragment of his past. Required for the true ending."}
 ]
 },
 {
@@ -874,10 +874,10 @@ phases:[
 {phase:3,name:"The Unmourned",hp:"Below 20 HP",desc:"Drops the facade. Uses every piece of leverage simultaneously.",color:"#ef5350"}
 ],
 loot:[
-{item:"Kingdom Vault Key",chance:"75%"},
-{item:"Debt Ledger",chance:"60%"},
-{item:"Chancellor’s Ring",chance:"40%"},
-{item:"Kingdom Signet",chance:"55%"}
+{item:"Kingdom Vault Key",chance:"75%",desc:"Opens the magically sealed vault beneath the throne room."},
+{item:"Debt Ledger",chance:"60%",desc:"Contains leverage and blackmail on 3 major NPC factions."},
+{item:"Chancellor’s Ring",chance:"40%",desc:"+2 to Social and Deception rolls when dealing with nobility."},
+{item:"Kingdom Signet",chance:"55%",desc:"Proof of royal authority. Can command remnant garrison troops once."}
 ]
 },
 {
@@ -896,9 +896,9 @@ phases:[
 {phase:3,name:"The Answer",hp:"Cannot be killed — only recedes",desc:"Direct confrontation. Asks one question of each character about their Destiny Thread.",color:"#ce93d8"}
 ],
 loot:[
-{item:"Drowned Archive fragment",chance:"70%"},
-{item:"Founding Document (arc key)",chance:"40%"},
-{item:"Waterlogged Enchantment Scroll",chance:"35%"}
+{item:"Drowned Archive Fragment",chance:"70%",desc:"A salvaged page containing one forgotten spell or map."},
+{item:"Founding Document (Arc Key)",chance:"40%",desc:"Reveals the true origin of the Hollow Realm's creation."},
+{item:"Waterlogged Enchantment Scroll",chance:"35%",desc:"Grants a random Mythic enchantment, but costs 2 HP to decipher."}
 ]
 },
 {
@@ -916,10 +916,10 @@ phases:[
 {phase:3,name:"The Burned",hp:"Below 25 HP",desc:"Project near completion. Cannot be stopped by conventional means.",color:"#ef5350"}
 ],
 loot:[
-{item:"Master Cavern Map",chance:"85%"},
-{item:"Burnt Cartographer Tools",chance:"60%"},
-{item:"Project Blueprint",chance:"55%"},
-{item:"Hollow Anchor material",chance:"35%"}
+{item:"Master Cavern Map",chance:"85%",desc:"Reveals all hidden traps and shortcuts in the Underground."},
+{item:"Burnt Cartographer Tools",chance:"60%",desc:"Allows the user to alter one map path or wall per session."},
+{item:"Project Blueprint",chance:"55%",desc:"Details her plan to permanently sever the Hollow's Edge."},
+{item:"Hollow Anchor Material",chance:"35%",desc:"Used to stabilize reality or forge a Mythic weapon."}
 ]
 },
 {
@@ -937,9 +937,9 @@ phases:[
 {phase:3,name:"The Keeper",hp:"Becomes a character",desc:"If players engaged honestly, meets them as a communicative presence. Negotiation about the boundary’s future.",color:"#ce93d8"}
 ],
 loot:[
-{item:"Edge Fragment (mythic material)",chance:"Phase 2 pass — 60%"},
-{item:"Boundary Access (consequence)",chance:"Phase 2 pass — 100%"},
-{item:"The Record’s Summary",chance:"Phase 3 — 100%"}
+{item:"Edge Fragment (Mythic Material)",chance:"Phase 2 pass — 60%",desc:"Grants the bearer permanent immunity to the Hollow Pull."},
+{item:"Boundary Access (Consequence)",chance:"Phase 2 pass — 100%",desc:"The party can now safely traverse the Edge without taking damage."},
+{item:"The Record’s Summary",chance:"Phase 3 — 100%",desc:"A log of the Warden's observations. Answers 3 GM questions truthfully."}
 ]
 }
 ];
@@ -1378,7 +1378,6 @@ return`<div class="modal-box">
 </div>`;
 }
 
-
 // CREATE TAB
 function renderCreate(){
 const c=STATE.creation;
@@ -1415,7 +1414,15 @@ return `<div class="card">
     </div>
   </div>
   <div style="margin-bottom:8px"><label class="label">TikTok Username</label><input class="input" value="${esc(c.username)}" oninput="STATE.creation.username=this.value" placeholder="@username"></div> 
-  <div style="margin-bottom:8px"><label class="label">Character Name</label> <select class="select" onchange="STATE.creation.charname=this.value"> <option value="">— Select Name —</option> ${NAMES.filter(n=>!STATE.players.find(p=>p.charname===n&&!p.isDead)).map(n=>`<option${c.charname===n?' selected':''}>${n}</option>`).join('')} </select></div> 
+  
+  <div style="margin-bottom:8px">
+    <label class="label">Character Name</label> 
+    <input class="input" value="${esc(c.charname)}" oninput="STATE.creation.charname=this.value" placeholder="Type custom name or pick..." list="name-list">
+    <datalist id="name-list">
+      ${NAMES.filter(n=>!STATE.players.find(p=>p.charname===n&&!p.isDead)).map(n=>`<option value="${n}"></option>`).join('')}
+    </datalist>
+  </div> 
+
   <div style="margin-bottom:8px"><label class="label">Class</label> <select class="select" onchange="STATE.creation={...STATE.creation,cls:this.value,repRoll:null,traitRoll:null,weaponRoll:null,skillRoll:null,shadowRoll:null,enchantRoll:null,destinyRoll:null};render()"> <option value="">— Select Class —</option> ${CLASSES.map(cl=>`<option value="${cl}"${c.cls===cl?' selected':''}>${CLASS_ICON[cl]} ${cl} — HP ${CLASS_HP[cl]}</option>`).join('')} </select></div> 
   
   ${base?`<div class="roll-box" style="margin-bottom:8px">
@@ -1432,7 +1439,6 @@ return `<div class="card">
   <button class="btn btn-purple btn-full" style="margin-top:12px" onclick="addPlayer()">✦ Add to The Hollow Realm</button>
 </div>`;
 }
-
 
 function renderCreationRolls(c){
 const rolls=[
@@ -1510,6 +1516,7 @@ function renderNPCs() {
   `;
 }
 
+// 🎭 VILLAINS TAB & BESTIARY
 function renderVillains() {
   const custVil = STATE.customVillains || [];
   const allVillains = [...VILLAIN_LORE, ...custVil];
@@ -1522,8 +1529,8 @@ function renderVillains() {
         <div style="display:flex; gap:10px; align-items:center">
           <span style="font-size:1.5rem; ${!isActive ? 'filter:grayscale(1); opacity:0.6;' : ''}">${v.icon}</span>
           <div>
-            <div style="font-weight:bold; color:${isActive ? '#fff' : 'var(--dim)'}">${esc(v.name)}</div>
-            <div style="font-size:0.6rem; color:${v.color}">${esc(v.title)}</div>
+            <div style="font-weight:bold; color:${isActive ? '#fff' : 'var(--dim)'}">${v.name}</div>
+            <div style="font-size:0.6rem; color:${v.color}">${v.title}</div>
           </div>
         </div>
         <div style="display:flex; gap:5px">
@@ -1534,6 +1541,7 @@ function renderVillains() {
           }
         </div>
       </div>
+      
       <div class="lore-tab-bar" style="margin-top:12px">
         ${['lore', 'combat', 'phases', 'loot'].map(sec => `
           <div class="lore-tab ${STATE.villainTab === v.id && STATE.villainSec === sec ? 'active' : ''}" 
@@ -1542,11 +1550,58 @@ function renderVillains() {
           </div>
         `).join('')}
       </div>
+
       <div style="margin-top:10px; font-size:0.7rem; min-height:80px; color:var(--text); line-height:1.4">
         ${renderVillainSubSection(v)}
       </div>
     </div>
   `;
+
+  return `
+    <div class="card-glow">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px">
+        <div class="section-title" style="margin-bottom:0; color:var(--red)">🎭 ACTIVE BOSSES</div>
+        <button class="btn btn-sm" style="border-color:var(--red); color:var(--red)" onclick="STATE.showAddVillain=!STATE.showAddVillain;render()">
+          ${STATE.showAddVillain ? '✕ Cancel' : '＋ New Villain'}
+        </button>
+      </div>
+
+      ${STATE.showAddVillain ? `
+        <div class="roll-box" style="border-color:var(--red); margin-bottom:15px">
+          <label class="label">Villain Name</label><input class="input" id="v-name" style="margin-bottom:8px">
+          <label class="label">Title</label><input class="input" id="v-title" style="margin-bottom:8px">
+          <label class="label">Icon</label><input class="input" id="v-icon" placeholder="💀" style="margin-bottom:8px">
+          <label class="label">Max HP</label><input class="input" id="v-hp" type="number" value="100" style="margin-bottom:10px">
+          <button class="btn btn-red btn-full" onclick="addCustomVillain()">✦ Forge Boss</button>
+        </div>
+      ` : ''}
+
+      ${activeVillains.length === 0 ? '<div class="empty-state">No villains are currently active.</div>' : activeVillains.map(v => buildCard(v, true)).join('')}
+    </div>
+
+    <div class="card">
+      <div class="section-title">Bestiary (Inactive / Prep)</div>
+      ${inactiveVillains.length === 0 ? '<div style="color:var(--dim); font-size:0.7rem;">All villains are active.</div>' : inactiveVillains.map(v => buildCard(v, false)).join('')}
+    </div>
+  `;
+}
+
+function renderVillainSubSection(v) {
+  if(STATE.villainSec === 'lore') return `<div style="font-style:italic; margin-bottom:8px">"${v.tagline}"</div><div>${v.lore}</div><div style="margin-top:8px"><b>Motivation:</b> ${v.motivation}</div>`;
+  if(STATE.villainSec === 'combat') return `<div style="color:var(--green); margin-bottom:4px"><b>Strengths:</b><br>${v.strengths.map(s=>`• ${s}`).join('<br>')}</div><div style="color:var(--red); margin-top:8px"><b>Weaknesses:</b><br>${v.weaknesses.map(w=>`• ${w}`).join('<br>')}</div>`;
+  if(STATE.villainSec === 'phases') return v.phases.map(p=>`<div style="margin-bottom:8px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.05)"><div style="color:${p.color}; font-weight:bold">Phase ${p.phase}: ${p.name} <span style="font-size:0.6rem; color:var(--dim)">(${p.hp})</span></div><div>${p.desc}</div></div>`).join('');
+  if(STATE.villainSec === 'loot') return (v.loot || []).map(l => `
+    <div style="padding:6px 0; border-bottom:1px solid rgba(255,255,255,0.05); margin-bottom:4px;">
+      <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:4px">
+        <span style="font-weight:bold; color:var(--purple-light)">${l.item}</span>
+        <span style="color:var(--gold); font-size:0.65rem">${l.chance}</span>
+      </div>
+      ${l.desc ? `<div style="font-size:0.6rem; color:var(--dim); font-style:italic">"${l.desc}"</div>` : ''}
+    </div>
+  `).join('');
+  return '';
+}
+
 
   return `
     <div class="card-glow">
